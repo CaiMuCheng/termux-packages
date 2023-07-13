@@ -1,0 +1,36 @@
+--- iproute2-6.0.0/bridge/vni.c.orig	2022-10-05 00:17:15.000000000 +0900
++++ iproute2-6.0.0/bridge/vni.c	2022-10-15 20:17:02.509331351 +0900
+@@ -41,6 +41,9 @@
+ 	exit(-1);
+ }
+ 
++#undef strdupa
++#define strdupa(s) strcpy(alloca(strlen(s) + 1), s)
++
+ static int parse_vni_filter(const char *argv, struct nlmsghdr *n, int reqsize,
+ 			    inet_prefix *group)
+ {
+--- iproute2-5.15.0/ip/iplink_bond.c.orig
++++ iproute2-5.15.0/ip/iplink_bond.c
+@@ -171,6 +171,9 @@
+ 	print_explain(stderr);
+ }
+ 
++#undef strdupa
++#define strdupa(s) strcpy(alloca(strlen(s) + 1), s)
++
+ static int bond_parse_opt(struct link_util *lu, int argc, char **argv,
+ 			  struct nlmsghdr *n)
+ {
+--- iproute2-5.15.0/lib/color.c.orig
++++ iproute2-5.15.0/lib/color.c
+@@ -93,6 +93,9 @@
+ 	return false;
+ }
+ 
++#undef strdupa
++#define strdupa(s) strcpy(alloca(strlen(s) + 1), s)
++
+ bool matches_color(const char *arg, int *val)
+ {
+ 	char *dup, *p;
